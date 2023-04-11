@@ -1,0 +1,5473 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "ProdSim API",
+    "description": "\nThe ProdSim-API allows you to create and run production simulations and optimizations with the ProdSim library. \n",
+    "contact": {
+      "name": "Sebastian Behrendt",
+      "email": "sebastianbehrendt97@gmail.com"
+    },
+    "license": {
+      "name": "MIT License",
+      "url": "https://mit-license.org/"
+    },
+    "version": "0.0.1"
+  },
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "Root",
+        "operationId": "root__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Root  Get",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/load_example_project": {
+      "get": {
+        "tags": ["projects"],
+        "summary": "Load Example Project",
+        "operationId": "load_example_project_load_example_project_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Load Example Project Load Example Project Get",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/load_optimization_example": {
+      "get": {
+        "tags": ["projects"],
+        "summary": "Load Example Project",
+        "operationId": "load_example_project_load_optimization_example_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Load Example Project Load Optimization Example Get",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects": {
+      "get": {
+        "tags": ["projects"],
+        "summary": "Read Projects",
+        "operationId": "read_projects_projects_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Read Projects Projects Get",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Project"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["projects"],
+        "summary": "Create Project",
+        "operationId": "create_project_projects_put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Project"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/{project_id}": {
+      "get": {
+        "tags": ["projects"],
+        "summary": "Read Project",
+        "operationId": "read_project_projects__project_id__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Project"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["projects"],
+        "summary": "Delete Project",
+        "operationId": "delete_project_projects__project_id__delete",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/{project_id}/adapters": {
+      "get": {
+        "tags": ["adapters"],
+        "summary": "Read Adapters",
+        "operationId": "read_adapters_projects__project_id__adapters_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Read Adapters Projects  Project Id  Adapters Get",
+                  "type": "object",
+                  "additionalProperties": {
+                    "$ref": "#/components/schemas/JsonAdapter"
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["adapters"],
+        "summary": "Create Adapter",
+        "operationId": "create_adapter_projects__project_id__adapters_put",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JsonAdapter"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/{project_id}/adapters/{adapter_id}": {
+      "get": {
+        "tags": ["adapters"],
+        "summary": "Read Adapter",
+        "operationId": "read_adapter_projects__project_id__adapters__adapter_id__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Adapter Id",
+              "type": "string"
+            },
+            "name": "adapter_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonAdapter"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["adapters"],
+        "summary": "Update Adapter",
+        "operationId": "update_adapter_projects__project_id__adapters__adapter_id__put",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Adapter Id",
+              "type": "string"
+            },
+            "name": "adapter_id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JsonAdapter"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["adapters"],
+        "summary": "Delete Adapter",
+        "operationId": "delete_adapter_projects__project_id__adapters__adapter_id__delete",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Adapter Id",
+              "type": "string"
+            },
+            "name": "adapter_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/{project_id}/adapters/{adapter_id}/run_simulation": {
+      "get": {
+        "tags": ["simulation"],
+        "summary": "Run Simulation",
+        "operationId": "run_simulation_projects__project_id__adapters__adapter_id__run_simulation_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Adapter Id",
+              "type": "string"
+            },
+            "name": "adapter_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/{project_id}/adapters/{adapter_id}/optimize_configuration": {
+      "get": {
+        "tags": ["optimization"],
+        "summary": "Run Configuration Optimization",
+        "operationId": "run_configuration_optimization_projects__project_id__adapters__adapter_id__optimize_configuration_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Adapter Id",
+              "type": "string"
+            },
+            "name": "adapter_id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Hyper Parameters",
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/EvolutionaryAlgorithmHyperparameters"
+                  },
+                  {
+                    "$ref": "#/components/schemas/SimulatedAnnealingHyperparameters"
+                  },
+                  {
+                    "$ref": "#/components/schemas/TabuSearchHyperparameters"
+                  },
+                  {
+                    "$ref": "#/components/schemas/MathOptHyperparameters"
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/{project_id}/adapters/{adapter_id}/optimize_configuration/results": {
+      "get": {
+        "tags": ["optimization"],
+        "summary": "Get Optimization Results",
+        "operationId": "get_optimization_results_projects__project_id__adapters__adapter_id__optimize_configuration_results_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Adapter Id",
+              "type": "string"
+            },
+            "name": "adapter_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Get Optimization Results Projects  Project Id  Adapters  Adapter Id  Optimize Configuration Results Get",
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "array",
+                    "items": {
+                      "anyOf": [
+                        {
+                          "$ref": "#/components/schemas/Output"
+                        },
+                        {
+                          "$ref": "#/components/schemas/Throughput"
+                        },
+                        {
+                          "$ref": "#/components/schemas/Cost"
+                        },
+                        {
+                          "$ref": "#/components/schemas/WIP"
+                        },
+                        {
+                          "$ref": "#/components/schemas/ThroughputTime"
+                        },
+                        {
+                          "$ref": "#/components/schemas/ProcessingTime"
+                        },
+                        {
+                          "$ref": "#/components/schemas/ProductiveTime"
+                        },
+                        {
+                          "$ref": "#/components/schemas/StandbyTime"
+                        },
+                        {
+                          "$ref": "#/components/schemas/SetupTime"
+                        },
+                        {
+                          "$ref": "#/components/schemas/UnscheduledDowntime"
+                        },
+                        {
+                          "$ref": "#/components/schemas/DynamicWIP"
+                        },
+                        {
+                          "$ref": "#/components/schemas/DynamicThroughputTime"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/{project_id}/adapters/{adapter_id}/optimize_configuration/register/{solution_id}": {
+      "get": {
+        "tags": ["optimization"],
+        "summary": "Register Adapter With Evaluation",
+        "operationId": "register_adapter_with_evaluation_projects__project_id__adapters__adapter_id__optimize_configuration_register__solution_id__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Adapter Id",
+              "type": "string"
+            },
+            "name": "adapter_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Solution Id",
+              "type": "string"
+            },
+            "name": "solution_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/{project_id}/adapters/{adapter_id}/optimize_configuration/pareto_front_performances": {
+      "get": {
+        "tags": ["optimization"],
+        "summary": "Get Optimization Pareto Front",
+        "operationId": "get_optimization_pareto_front_projects__project_id__adapters__adapter_id__optimize_configuration_pareto_front_performances_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Adapter Id",
+              "type": "string"
+            },
+            "name": "adapter_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Get Optimization Pareto Front Projects  Project Id  Adapters  Adapter Id  Optimize Configuration Pareto Front Performances Get",
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/{project_id}/adapters/{adapter_id}/optimize_configuration/{solution_id}": {
+      "get": {
+        "tags": ["optimization"],
+        "summary": "Get Optimization Solution",
+        "operationId": "get_optimization_solution_projects__project_id__adapters__adapter_id__optimize_configuration__solution_id__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Adapter Id",
+              "type": "string"
+            },
+            "name": "adapter_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Solution Id",
+              "type": "string"
+            },
+            "name": "solution_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonAdapter"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/{project_id}/adapters/{adapter_id}/results/static_results": {
+      "get": {
+        "tags": ["results"],
+        "summary": "Get All Results",
+        "operationId": "get_all_results_projects__project_id__adapters__adapter_id__results_static_results_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Adapter Id",
+              "type": "string"
+            },
+            "name": "adapter_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Get All Results Projects  Project Id  Adapters  Adapter Id  Results Static Results Get",
+                  "type": "array",
+                  "items": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/Output"
+                      },
+                      {
+                        "$ref": "#/components/schemas/Throughput"
+                      },
+                      {
+                        "$ref": "#/components/schemas/Cost"
+                      },
+                      {
+                        "$ref": "#/components/schemas/WIP"
+                      },
+                      {
+                        "$ref": "#/components/schemas/ThroughputTime"
+                      },
+                      {
+                        "$ref": "#/components/schemas/ProcessingTime"
+                      },
+                      {
+                        "$ref": "#/components/schemas/ProductiveTime"
+                      },
+                      {
+                        "$ref": "#/components/schemas/StandbyTime"
+                      },
+                      {
+                        "$ref": "#/components/schemas/SetupTime"
+                      },
+                      {
+                        "$ref": "#/components/schemas/UnscheduledDowntime"
+                      },
+                      {
+                        "$ref": "#/components/schemas/DynamicWIP"
+                      },
+                      {
+                        "$ref": "#/components/schemas/DynamicThroughputTime"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/{project_id}/adapters/{adapter_id}/results/event_results": {
+      "get": {
+        "tags": ["results"],
+        "summary": "Get Event Results",
+        "operationId": "get_event_results_projects__project_id__adapters__adapter_id__results_event_results_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Adapter Id",
+              "type": "string"
+            },
+            "name": "adapter_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Get Event Results Projects  Project Id  Adapters  Adapter Id  Results Event Results Get",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Event"
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/{project_id}/adapters/{adapter_id}/results/{kpi}": {
+      "get": {
+        "tags": ["results"],
+        "summary": "Get Output Results",
+        "operationId": "get_output_results_projects__project_id__adapters__adapter_id__results__kpi__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Adapter Id",
+              "type": "string"
+            },
+            "name": "adapter_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/KPIEnum"
+            },
+            "name": "kpi",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Get Output Results Projects  Project Id  Adapters  Adapter Id  Results  Kpi  Get",
+                  "type": "array",
+                  "items": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/Output"
+                      },
+                      {
+                        "$ref": "#/components/schemas/Throughput"
+                      },
+                      {
+                        "$ref": "#/components/schemas/Cost"
+                      },
+                      {
+                        "$ref": "#/components/schemas/WIP"
+                      },
+                      {
+                        "$ref": "#/components/schemas/ThroughputTime"
+                      },
+                      {
+                        "$ref": "#/components/schemas/ProcessingTime"
+                      },
+                      {
+                        "$ref": "#/components/schemas/ProductiveTime"
+                      },
+                      {
+                        "$ref": "#/components/schemas/StandbyTime"
+                      },
+                      {
+                        "$ref": "#/components/schemas/SetupTime"
+                      },
+                      {
+                        "$ref": "#/components/schemas/UnscheduledDowntime"
+                      },
+                      {
+                        "$ref": "#/components/schemas/DynamicWIP"
+                      },
+                      {
+                        "$ref": "#/components/schemas/DynamicThroughputTime"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/{project_id}/adapters/{adapter_id}/time_models": {
+      "get": {
+        "tags": ["time_models"],
+        "summary": "Read Time Models",
+        "operationId": "read_time_models_projects__project_id__adapters__adapter_id__time_models_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Adapter Id",
+              "type": "string"
+            },
+            "name": "adapter_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Read Time Models Projects  Project Id  Adapters  Adapter Id  Time Models Get",
+                  "type": "array",
+                  "items": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/HistoryTimeModelData"
+                      },
+                      {
+                        "$ref": "#/components/schemas/ManhattanDistanceTimeModelData"
+                      },
+                      {
+                        "$ref": "#/components/schemas/FunctionTimeModelData"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/{project_id}/adapters/{adapter_id}/time_models/{time_model_id}": {
+      "get": {
+        "tags": ["time_models"],
+        "summary": "Read Time Model",
+        "operationId": "read_time_model_projects__project_id__adapters__adapter_id__time_models__time_model_id__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Adapter Id",
+              "type": "string"
+            },
+            "name": "adapter_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Time Model Id",
+              "type": "string"
+            },
+            "name": "time_model_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Read Time Model Projects  Project Id  Adapters  Adapter Id  Time Models  Time Model Id  Get",
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/HistoryTimeModelData"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ManhattanDistanceTimeModelData"
+                    },
+                    {
+                      "$ref": "#/components/schemas/FunctionTimeModelData"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["time_models"],
+        "summary": "Create Time Model",
+        "operationId": "create_time_model_projects__project_id__adapters__adapter_id__time_models__time_model_id__put",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Adapter Id",
+              "type": "string"
+            },
+            "name": "adapter_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Time Model Id"
+            },
+            "name": "time_model_id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Time Model",
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/HistoryTimeModelData"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ManhattanDistanceTimeModelData"
+                  },
+                  {
+                    "$ref": "#/components/schemas/FunctionTimeModelData"
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/{project_id}/adapters/{adapter_id}/materials": {
+      "get": {
+        "tags": ["materials"],
+        "summary": "Read Materials",
+        "operationId": "read_materials_projects__project_id__adapters__adapter_id__materials_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Adapter Id",
+              "type": "string"
+            },
+            "name": "adapter_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Read Materials Projects  Project Id  Adapters  Adapter Id  Materials Get",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MaterialData"
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/{project_id}/adapters/{adapter_id}/materials/{material_id}": {
+      "get": {
+        "tags": ["materials"],
+        "summary": "Read Material",
+        "operationId": "read_material_projects__project_id__adapters__adapter_id__materials__material_id__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Adapter Id",
+              "type": "string"
+            },
+            "name": "adapter_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Material Id",
+              "type": "string"
+            },
+            "name": "material_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MaterialData"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["materials"],
+        "summary": "Create Material",
+        "operationId": "create_material_projects__project_id__adapters__adapter_id__materials__material_id__put",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Adapter Id",
+              "type": "string"
+            },
+            "name": "adapter_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Material Id"
+            },
+            "name": "material_id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MaterialData"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/{project_id}/adapters/{adapter_id}/processes": {
+      "get": {
+        "tags": ["processes"],
+        "summary": "Read Processes",
+        "operationId": "read_processes_projects__project_id__adapters__adapter_id__processes_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Adapter Id",
+              "type": "string"
+            },
+            "name": "adapter_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Read Processes Projects  Project Id  Adapters  Adapter Id  Processes Get",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProcessData"
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/{project_id}/adapters/{adapter_id}/processes/{process_id}": {
+      "get": {
+        "tags": ["processes"],
+        "summary": "Read Process",
+        "operationId": "read_process_projects__project_id__adapters__adapter_id__processes__process_id__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Adapter Id",
+              "type": "string"
+            },
+            "name": "adapter_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Process Id",
+              "type": "string"
+            },
+            "name": "process_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProcessData"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["processes"],
+        "summary": "Create Process",
+        "operationId": "create_process_projects__project_id__adapters__adapter_id__processes__process_id__put",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Adapter Id",
+              "type": "string"
+            },
+            "name": "adapter_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Process Id"
+            },
+            "name": "process_id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessData"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/{project_id}/adapters/{adapter_id}/queues": {
+      "get": {
+        "tags": ["queues"],
+        "summary": "Read Queues",
+        "operationId": "read_queues_projects__project_id__adapters__adapter_id__queues_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Adapter Id",
+              "type": "string"
+            },
+            "name": "adapter_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Read Queues Projects  Project Id  Adapters  Adapter Id  Queues Get",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/QueueData"
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/{project_id}/adapters/{adapter_id}/queues/{queue_id}": {
+      "get": {
+        "tags": ["queues"],
+        "summary": "Read Queue",
+        "operationId": "read_queue_projects__project_id__adapters__adapter_id__queues__queue_id__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Adapter Id",
+              "type": "string"
+            },
+            "name": "adapter_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Queue Id",
+              "type": "string"
+            },
+            "name": "queue_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QueueData"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["queues"],
+        "summary": "Create Queue",
+        "operationId": "create_queue_projects__project_id__adapters__adapter_id__queues__queue_id__put",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Adapter Id",
+              "type": "string"
+            },
+            "name": "adapter_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Queue Id"
+            },
+            "name": "queue_id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QueueData"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/{project_id}/adapters/{adapter_id}/resources": {
+      "get": {
+        "tags": ["resources"],
+        "summary": "Read Resources",
+        "operationId": "read_resources_projects__project_id__adapters__adapter_id__resources_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Adapter Id",
+              "type": "string"
+            },
+            "name": "adapter_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Read Resources Projects  Project Id  Adapters  Adapter Id  Resources Get",
+                  "type": "array",
+                  "items": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/ProductionResourceData"
+                      },
+                      {
+                        "$ref": "#/components/schemas/TransportResourceData"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/{project_id}/adapters/{adapter_id}/resources/{resource_id}": {
+      "get": {
+        "tags": ["resources"],
+        "summary": "Read Resource",
+        "operationId": "read_resource_projects__project_id__adapters__adapter_id__resources__resource_id__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Adapter Id",
+              "type": "string"
+            },
+            "name": "adapter_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Resource Id",
+              "type": "string"
+            },
+            "name": "resource_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Read Resource Projects  Project Id  Adapters  Adapter Id  Resources  Resource Id  Get",
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/ProductionResourceData"
+                    },
+                    {
+                      "$ref": "#/components/schemas/TransportResourceData"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["resources"],
+        "summary": "Create Resource",
+        "operationId": "create_resource_projects__project_id__adapters__adapter_id__resources__resource_id__put",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Adapter Id",
+              "type": "string"
+            },
+            "name": "adapter_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Resource Id",
+              "type": "string"
+            },
+            "name": "resource_id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Resource",
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/ProductionResourceData"
+                  },
+                  {
+                    "$ref": "#/components/schemas/TransportResourceData"
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["resources"],
+        "summary": "Delete Resource",
+        "operationId": "delete_resource_projects__project_id__adapters__adapter_id__resources__resource_id__delete",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Adapter Id",
+              "type": "string"
+            },
+            "name": "adapter_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Resource Id",
+              "type": "string"
+            },
+            "name": "resource_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/{project_id}/adapters/{adapter_id}/sinks": {
+      "get": {
+        "tags": ["sinks"],
+        "summary": "Read Sinks",
+        "operationId": "read_sinks_projects__project_id__adapters__adapter_id__sinks_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Adapter Id",
+              "type": "string"
+            },
+            "name": "adapter_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Read Sinks Projects  Project Id  Adapters  Adapter Id  Sinks Get",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SinkData"
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/{project_id}/adapters/{adapter_id}/sinks/{sink_id}": {
+      "get": {
+        "tags": ["sinks"],
+        "summary": "Read Sink",
+        "operationId": "read_sink_projects__project_id__adapters__adapter_id__sinks__sink_id__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Adapter Id",
+              "type": "string"
+            },
+            "name": "adapter_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Sink Id",
+              "type": "string"
+            },
+            "name": "sink_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SinkData"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["sinks"],
+        "summary": "Create Sink",
+        "operationId": "create_sink_projects__project_id__adapters__adapter_id__sinks__sink_id__put",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Adapter Id",
+              "type": "string"
+            },
+            "name": "adapter_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Sink Id"
+            },
+            "name": "sink_id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SinkData"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/{project_id}/adapters/{adapter_id}/sources": {
+      "get": {
+        "tags": ["sources"],
+        "summary": "Read Sources",
+        "operationId": "read_sources_projects__project_id__adapters__adapter_id__sources_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Adapter Id",
+              "type": "string"
+            },
+            "name": "adapter_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Read Sources Projects  Project Id  Adapters  Adapter Id  Sources Get",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SourceData"
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/{project_id}/adapters/{adapter_id}/sources/{source_id}": {
+      "get": {
+        "tags": ["sources"],
+        "summary": "Read Source",
+        "operationId": "read_source_projects__project_id__adapters__adapter_id__sources__source_id__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Adapter Id",
+              "type": "string"
+            },
+            "name": "adapter_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Source Id",
+              "type": "string"
+            },
+            "name": "source_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SourceData"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["sources"],
+        "summary": "Create Source",
+        "operationId": "create_source_projects__project_id__adapters__adapter_id__sources__source_id__put",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Adapter Id",
+              "type": "string"
+            },
+            "name": "adapter_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Source Id"
+            },
+            "name": "source_id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SourceData"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/{project_id}/adapters/{adapter_id}/states": {
+      "get": {
+        "tags": ["states"],
+        "summary": "Read States",
+        "operationId": "read_states_projects__project_id__adapters__adapter_id__states_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Adapter Id",
+              "type": "string"
+            },
+            "name": "adapter_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Read States Projects  Project Id  Adapters  Adapter Id  States Get",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StateData"
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/{project_id}/adapters/{adapter_id}/states/{state_id}": {
+      "get": {
+        "tags": ["states"],
+        "summary": "Read State",
+        "operationId": "read_state_projects__project_id__adapters__adapter_id__states__state_id__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Adapter Id",
+              "type": "string"
+            },
+            "name": "adapter_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "State Id",
+              "type": "string"
+            },
+            "name": "state_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StateData"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["states"],
+        "summary": "Create State",
+        "operationId": "create_state_projects__project_id__adapters__adapter_id__states__state_id__put",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Adapter Id",
+              "type": "string"
+            },
+            "name": "adapter_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "State Id"
+            },
+            "name": "state_id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StateData"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/{project_id}/adapters/{adapter_id}/scenario": {
+      "get": {
+        "tags": ["scenario"],
+        "summary": "Read Scenario",
+        "operationId": "read_scenario_projects__project_id__adapters__adapter_id__scenario_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Adapter Id",
+              "type": "string"
+            },
+            "name": "adapter_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScenarioData"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["scenario"],
+        "summary": "Create Scenario",
+        "operationId": "create_scenario_projects__project_id__adapters__adapter_id__scenario_put",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Adapter Id",
+              "type": "string"
+            },
+            "name": "adapter_id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ScenarioData"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BreakDownStateData": {
+        "title": "BreakDownStateData",
+        "required": [
+          "ID",
+          "description",
+          "time_model_id",
+          "type",
+          "repair_time_model_id"
+        ],
+        "type": "object",
+        "properties": {
+          "ID": {
+            "title": "Id",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "time_model_id": {
+            "title": "Time Model Id",
+            "type": "string"
+          },
+          "type": {
+            "title": "Type",
+            "enum": ["BreakDownState"],
+            "type": "string"
+          },
+          "repair_time_model_id": {
+            "title": "Repair Time Model Id",
+            "type": "string"
+          }
+        },
+        "example": {
+          "ID": "Breakdownstate_1",
+          "description": "Breakdown state machine 1",
+          "time_model_id": "function_time_model_5",
+          "type": "BreakDownState",
+          "repair_time_model_id": "function_time_model_8"
+        }
+      },
+      "CapabilityProcessData": {
+        "title": "CapabilityProcessData",
+        "required": [
+          "ID",
+          "description",
+          "time_model_id",
+          "type",
+          "capability"
+        ],
+        "type": "object",
+        "properties": {
+          "ID": {
+            "title": "Id",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "time_model_id": {
+            "title": "Time Model Id",
+            "type": "string"
+          },
+          "type": {
+            "title": "Type",
+            "enum": ["CapabilityProcesses"],
+            "type": "string"
+          },
+          "capability": {
+            "title": "Capability",
+            "type": "string"
+          }
+        },
+        "example": {
+          "ID": "P1",
+          "description": "Process 1",
+          "time_model_id": "function_time_model_1",
+          "type": "ProductionProcesses",
+          "capability": "C1"
+        }
+      },
+      "Cost": {
+        "title": "Cost",
+        "required": ["name"],
+        "type": "object",
+        "properties": {
+          "name": {
+            "title": "Name",
+            "enum": ["cost"],
+            "type": "string"
+          },
+          "target": {
+            "title": "Target",
+            "enum": ["min"],
+            "type": "string",
+            "default": "min"
+          },
+          "weight": {
+            "title": "Weight",
+            "type": "number",
+            "default": 1
+          },
+          "value": {
+            "title": "Value",
+            "type": "number"
+          },
+          "context": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/KPILevelEnum"
+            }
+          },
+          "resource": {
+            "title": "Resource",
+            "type": "string"
+          },
+          "material_type": {
+            "title": "Material Type",
+            "type": "string"
+          }
+        },
+        "example": {
+          "name": "cost",
+          "target": "min",
+          "weight": 0.5,
+          "value": 36000,
+          "context": ["system"]
+        }
+      },
+      "DynamicThroughputTime": {
+        "title": "DynamicThroughputTime",
+        "required": ["name", "target", "start_time", "end_time"],
+        "type": "object",
+        "properties": {
+          "name": {
+            "title": "Name",
+            "enum": ["dynamic_throughput_time"],
+            "type": "string"
+          },
+          "target": {
+            "title": "Target",
+            "enum": ["min", "max"],
+            "type": "string"
+          },
+          "weight": {
+            "title": "Weight",
+            "type": "number",
+            "default": 1
+          },
+          "value": {
+            "title": "Value",
+            "type": "number"
+          },
+          "context": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/KPILevelEnum"
+            }
+          },
+          "resource": {
+            "title": "Resource",
+            "type": "string"
+          },
+          "material_type": {
+            "title": "Material Type",
+            "type": "string"
+          },
+          "start_time": {
+            "title": "Start Time",
+            "type": "number"
+          },
+          "end_time": {
+            "title": "End Time",
+            "type": "number"
+          },
+          "material": {
+            "title": "Material",
+            "type": "string"
+          },
+          "process": {
+            "title": "Process",
+            "type": "string"
+          }
+        },
+        "example": {
+          "name": "throughput_time",
+          "target": "min",
+          "weight": 1,
+          "value": 201.3,
+          "context": ["system", "material"],
+          "material_type": "MaterialType_1",
+          "material": "Material_1_23"
+        }
+      },
+      "DynamicWIP": {
+        "title": "DynamicWIP",
+        "required": ["name", "target", "start_time", "end_time"],
+        "type": "object",
+        "properties": {
+          "name": {
+            "title": "Name",
+            "enum": ["dynamic_WIP"],
+            "type": "string"
+          },
+          "target": {
+            "title": "Target",
+            "enum": ["min", "max"],
+            "type": "string"
+          },
+          "weight": {
+            "title": "Weight",
+            "type": "number",
+            "default": 1
+          },
+          "value": {
+            "title": "Value",
+            "type": "number"
+          },
+          "context": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/KPILevelEnum"
+            }
+          },
+          "resource": {
+            "title": "Resource",
+            "type": "string"
+          },
+          "material_type": {
+            "title": "Material Type",
+            "type": "string"
+          },
+          "start_time": {
+            "title": "Start Time",
+            "type": "number"
+          },
+          "end_time": {
+            "title": "End Time",
+            "type": "number"
+          },
+          "material": {
+            "title": "Material",
+            "type": "string"
+          },
+          "process": {
+            "title": "Process",
+            "type": "string"
+          }
+        },
+        "example": {
+          "name": "dynamic_WIP",
+          "target": "min",
+          "weight": 1,
+          "value": 121,
+          "context": ["system", "material"],
+          "material_type": "MaterialType_1",
+          "start_time": 21.2,
+          "end_time": 23.4
+        }
+      },
+      "Event": {
+        "title": "Event",
+        "required": ["time", "resource", "state", "state_type", "activity"],
+        "type": "object",
+        "properties": {
+          "time": {
+            "title": "Time",
+            "type": "number"
+          },
+          "resource": {
+            "title": "Resource",
+            "type": "string"
+          },
+          "state": {
+            "title": "State",
+            "type": "string"
+          },
+          "state_type": {
+            "title": "State Type",
+            "type": "string"
+          },
+          "activity": {
+            "title": "Activity",
+            "type": "string"
+          },
+          "material": {
+            "title": "Material",
+            "type": "string"
+          },
+          "expected_end_time": {
+            "title": "Expected End Time",
+            "type": "number"
+          },
+          "target_location": {
+            "title": "Target Location",
+            "type": "string"
+          }
+        },
+        "example": {
+          "time": 12,
+          "resource": "R1",
+          "state": "P1",
+          "state_type": "Production",
+          "activity": "start state",
+          "material": "Material_1_12",
+          "expected_end_time": 24.3
+        }
+      },
+      "EvolutionaryAlgorithmHyperparameters": {
+        "title": "EvolutionaryAlgorithmHyperparameters",
+        "required": [
+          "seed",
+          "number_of_generations",
+          "population_size",
+          "mutation_rate",
+          "crossover_rate",
+          "number_of_processes"
+        ],
+        "type": "object",
+        "properties": {
+          "seed": {
+            "title": "Seed",
+            "type": "integer"
+          },
+          "number_of_generations": {
+            "title": "Number Of Generations",
+            "type": "integer"
+          },
+          "population_size": {
+            "title": "Population Size",
+            "type": "integer"
+          },
+          "mutation_rate": {
+            "title": "Mutation Rate",
+            "type": "number"
+          },
+          "crossover_rate": {
+            "title": "Crossover Rate",
+            "type": "number"
+          },
+          "number_of_processes": {
+            "title": "Number Of Processes",
+            "type": "integer"
+          }
+        }
+      },
+      "FunctionTimeModelData": {
+        "title": "FunctionTimeModelData",
+        "required": [
+          "ID",
+          "description",
+          "type",
+          "distribution_function",
+          "parameters"
+        ],
+        "type": "object",
+        "properties": {
+          "ID": {
+            "title": "Id",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "type": {
+            "title": "Type",
+            "enum": ["FunctionTimeModel"],
+            "type": "string"
+          },
+          "distribution_function": {
+            "title": "Distribution Function",
+            "enum": ["constant", "exponential", "normal"],
+            "type": "string"
+          },
+          "parameters": {
+            "title": "Parameters",
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "batch_size": {
+            "title": "Batch Size",
+            "type": "integer",
+            "default": 100
+          }
+        },
+        "example": {
+          "ID": "function_time_model_1",
+          "description": "normal distribution time model with 20 minutes",
+          "type": "FunctionTimeModel",
+          "distribution_function": "normal",
+          "parameters": [14.3, 5],
+          "batch_size": 100
+        }
+      },
+      "HTTPValidationError": {
+        "title": "HTTPValidationError",
+        "type": "object",
+        "properties": {
+          "detail": {
+            "title": "Detail",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            }
+          }
+        }
+      },
+      "HistoryTimeModelData": {
+        "title": "HistoryTimeModelData",
+        "required": ["ID", "description", "type", "history"],
+        "type": "object",
+        "properties": {
+          "ID": {
+            "title": "Id",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "type": {
+            "title": "Type",
+            "enum": ["HistoryTimeModel"],
+            "type": "string"
+          },
+          "history": {
+            "title": "History",
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          }
+        },
+        "example": {
+          "ID": "history_time_model_1",
+          "description": "history time model",
+          "type": "HistoryTimeModel",
+          "history": [25, 13, 15, 16, 17, 20, 21]
+        }
+      },
+      "JsonAdapter": {
+        "title": "JsonAdapter",
+        "type": "object",
+        "properties": {
+          "ID": {
+            "title": "Id",
+            "type": "string",
+            "default": ""
+          },
+          "valid_configuration": {
+            "title": "Valid Configuration",
+            "type": "boolean",
+            "default": true
+          },
+          "reconfiguration_cost": {
+            "title": "Reconfiguration Cost",
+            "type": "number",
+            "default": 0
+          },
+          "seed": {
+            "title": "Seed",
+            "type": "integer",
+            "default": 21
+          },
+          "time_model_data": {
+            "title": "Time Model Data",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/HistoryTimeModelData"
+                },
+                {
+                  "$ref": "#/components/schemas/ManhattanDistanceTimeModelData"
+                },
+                {
+                  "$ref": "#/components/schemas/FunctionTimeModelData"
+                }
+              ]
+            },
+            "default": []
+          },
+          "state_data": {
+            "title": "State Data",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/BreakDownStateData"
+                },
+                {
+                  "$ref": "#/components/schemas/ProductionStateData"
+                },
+                {
+                  "$ref": "#/components/schemas/TransportStateData"
+                },
+                {
+                  "$ref": "#/components/schemas/SetupStateData"
+                },
+                {
+                  "$ref": "#/components/schemas/ProcessBreakDownStateData"
+                }
+              ]
+            },
+            "default": []
+          },
+          "process_data": {
+            "title": "Process Data",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/ProductionProcessData"
+                },
+                {
+                  "$ref": "#/components/schemas/TransportProcessData"
+                },
+                {
+                  "$ref": "#/components/schemas/CapabilityProcessData"
+                }
+              ]
+            },
+            "default": []
+          },
+          "queue_data": {
+            "title": "Queue Data",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QueueData"
+            },
+            "default": []
+          },
+          "resource_data": {
+            "title": "Resource Data",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/ProductionResourceData"
+                },
+                {
+                  "$ref": "#/components/schemas/TransportResourceData"
+                }
+              ]
+            },
+            "default": []
+          },
+          "material_data": {
+            "title": "Material Data",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MaterialData"
+            },
+            "default": []
+          },
+          "sink_data": {
+            "title": "Sink Data",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SinkData"
+            },
+            "default": []
+          },
+          "source_data": {
+            "title": "Source Data",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SourceData"
+            },
+            "default": []
+          },
+          "scenario_data": {
+            "$ref": "#/components/schemas/ScenarioData"
+          }
+        },
+        "description": "Helper class that provides a standard way to create an ABC using\ninheritance.",
+        "states": {
+          "0": {
+            "ID": "Breakdownstate_1",
+            "description": "Breakdown state machine 1",
+            "time_model_id": "function_time_model_5",
+            "type": "BreakDownState"
+          },
+          "1": {
+            "ID": "Breakdownstate_2",
+            "description": "Breakdown state machine 2",
+            "time_model_id": "function_time_model_5",
+            "type": "BreakDownState"
+          },
+          "2": {
+            "ID": "Setup_State_1",
+            "description": "Setup state machine 1",
+            "time_model_id": "function_time_model_2",
+            "type": "SetupState",
+            "origin_setup": "P1",
+            "target_setup": "P2"
+          },
+          "3": {
+            "ID": "Setup_State_2",
+            "description": "Setup state machine 2",
+            "time_model_id": "function_time_model_2",
+            "type": "SetupState",
+            "origin_setup": "P2",
+            "target_setup": "P1"
+          },
+          "4": {
+            "ID": "Setup_State_3",
+            "description": "Setup state machine 3",
+            "time_model_id": "function_time_model_2",
+            "type": "SetupState",
+            "origin_setup": "P1",
+            "target_setup": "P3"
+          },
+          "5": {
+            "ID": "Setup_State_4",
+            "description": "Setup state machine 3",
+            "time_model_id": "function_time_model_3",
+            "type": "SetupState",
+            "origin_setup": "P3",
+            "target_setup": "P1"
+          },
+          "6": {
+            "ID": "ProcessBreakdownState_1",
+            "description": "Breakdown state process 1",
+            "time_model_id": "function_time_model_5",
+            "type": "ProcessBreakDownState",
+            "process_id": "P1"
+          }
+        },
+        "seed": 24,
+        "sinks": {
+          "0": {
+            "ID": "SK1",
+            "description": "Sink 1",
+            "location": [50, 50],
+            "material_type": "Material_1",
+            "input_queues": ["SinkQueue"]
+          },
+          "1": {
+            "ID": "SK2",
+            "description": "Sink 2",
+            "location": [55, 50],
+            "material_type": "Material_2",
+            "input_queues": ["SinkQueue"]
+          },
+          "2": {
+            "ID": "SK3",
+            "description": "Sink 3",
+            "location": [45, 50],
+            "material_type": "Material_3",
+            "input_queues": ["SinkQueue"]
+          }
+        },
+        "time_models": {
+          "0": {
+            "ID": "function_time_model_1",
+            "description": "normal distribution time model with 20 minutes",
+            "type": "FunctionTimeModel",
+            "distribution_function": "normal",
+            "parameters": [14.3, 5],
+            "batch_size": 100
+          },
+          "1": {
+            "ID": "function_time_model_2",
+            "description": "constant distribution time model with 10 minutes",
+            "type": "FunctionTimeModel",
+            "distribution_function": "constant",
+            "parameters": [15],
+            "batch_size": 100
+          },
+          "2": {
+            "ID": "function_time_model_3",
+            "description": "normal distribution time model with 20 minutes",
+            "type": "FunctionTimeModel",
+            "distribution_function": "normal",
+            "parameters": [20, 5],
+            "batch_size": 100
+          },
+          "3": {
+            "ID": "function_time_model_4",
+            "description": "exponential distribution time model with 100 minutes",
+            "type": "FunctionTimeModel",
+            "distribution_function": "exponential",
+            "parameters": [52],
+            "batch_size": 100
+          },
+          "4": {
+            "ID": "function_time_model_5",
+            "description": "exponential distribution time model with 150 minutes",
+            "type": "FunctionTimeModel",
+            "distribution_function": "exponential",
+            "parameters": [150],
+            "batch_size": 100
+          },
+          "5": {
+            "ID": "history_time_model_1",
+            "description": "history time model",
+            "type": "HistoryTimeModel",
+            "history": [25, 13, 15, 16, 17, 20, 21]
+          },
+          "6": {
+            "ID": "manhattan_time_model_1",
+            "description": "manhattan time model with speed 180 m/min = 3 m/s",
+            "type": "ManhattanDistanceTimeModel",
+            "speed": 30,
+            "reaction_time": 0.15
+          }
+        },
+        "processes": {
+          "0": {
+            "ID": "P1",
+            "description": "Process 1",
+            "time_model_id": "function_time_model_1",
+            "type": "ProductionProcesses"
+          },
+          "1": {
+            "ID": "P2",
+            "description": "Process 2",
+            "time_model_id": "function_time_model_2",
+            "type": "ProductionProcesses"
+          },
+          "2": {
+            "ID": "P3",
+            "description": "Process 3",
+            "time_model_id": "function_time_model_3",
+            "type": "ProductionProcesses"
+          },
+          "3": {
+            "ID": "TP1",
+            "description": "Transport Process 1",
+            "time_model_id": "manhattan_time_model_1",
+            "type": "TransportProcesses"
+          }
+        },
+        "resources": {
+          "0": {
+            "ID": "R1",
+            "description": "Resource 1",
+            "capacity": 2,
+            "location": [10, 10],
+            "controller": "SimpleController",
+            "control_policy": "FIFO",
+            "processes": ["P1", "P2"],
+            "process_capacity": [2, 1],
+            "states": [
+              "Breakdownstate_1",
+              "Setup_State_1",
+              "Setup_State_2",
+              "ProcessBreakdownState_1"
+            ],
+            "input_queues": ["IQ1"],
+            "output_queues": ["OQ1"]
+          },
+          "1": {
+            "ID": "R2",
+            "description": "Resource 2",
+            "capacity": 1,
+            "location": [20, 10],
+            "controller": "SimpleController",
+            "control_policy": "FIFO",
+            "processes": ["P2", "P3"],
+            "states": ["Breakdownstate_2"],
+            "input_queues": ["IQ1"],
+            "output_queues": ["OQ2"]
+          },
+          "2": {
+            "ID": "R3",
+            "description": "Resource 3",
+            "capacity": 2,
+            "location": [20, 20],
+            "controller": "SimpleController",
+            "control_policy": "FIFO",
+            "processes": ["P1", "P3"],
+            "process_capacity": [1, 2],
+            "states": [
+              "Breakdownstate_1",
+              "Breakdownstate_2",
+              "Setup_State_3",
+              "Setup_State_4"
+            ],
+            "input_queues": ["IQ2"],
+            "output_queues": ["OQ3"]
+          },
+          "3": {
+            "ID": "R4",
+            "description": "Resource 3",
+            "capacity": 2,
+            "location": [10, 20],
+            "controller": "SimpleController",
+            "control_policy": "FIFO",
+            "processes": ["P1", "P3"],
+            "process_capacity": [2, 2],
+            "states": ["Breakdownstate_1", "Setup_State_3", "Setup_State_4"],
+            "input_queues": ["IQ2"],
+            "output_queues": ["OQ3"]
+          },
+          "4": {
+            "ID": "TR1",
+            "description": "Transport Resource 1",
+            "capacity": 1,
+            "location": [15, 15],
+            "controller": "TransportController",
+            "control_policy": "FIFO",
+            "processes": ["TP1"],
+            "states": ["Breakdownstate_1"]
+          },
+          "5": {
+            "ID": "TR2",
+            "description": "Transport Resource 2",
+            "capacity": 1,
+            "location": [15, 20],
+            "controller": "TransportController",
+            "control_policy": "SPT_transport",
+            "processes": ["TP1"],
+            "states": ["Breakdownstate_1"]
+          }
+        },
+        "sources": {
+          "0": {
+            "ID": "S1",
+            "description": "Source 1",
+            "location": [0, 0],
+            "material_type": "Material_1",
+            "time_model_id": "function_time_model_4",
+            "router": "SimpleRouter",
+            "routing_heuristic": "shortest_queue",
+            "output_queues": ["SourceQueue"]
+          },
+          "1": {
+            "ID": "S2",
+            "description": "Source 2",
+            "location": [30, 30],
+            "material_type": "Material_2",
+            "time_model_id": "function_time_model_4",
+            "router": "SimpleRouter",
+            "routing_heuristic": "shortest_queue",
+            "output_queues": ["SourceQueue"]
+          },
+          "2": {
+            "ID": "S3",
+            "description": "Source 3",
+            "location": [40, 30],
+            "material_type": "Material_3",
+            "time_model_id": "function_time_model_4",
+            "router": "SimpleRouter",
+            "routing_heuristic": "shortest_queue",
+            "output_queues": ["SourceQueue"]
+          }
+        },
+        "queues": {
+          "0": {
+            "ID": "IQ1",
+            "description": "Input-queue 1 for R1 and R2",
+            "capacity": 10
+          },
+          "1": {
+            "ID": "OQ1",
+            "description": "Output-queue 1 for R1",
+            "capacity": 10
+          },
+          "2": {
+            "ID": "OQ2",
+            "description": "Output-queue 2 for R2",
+            "capacity": 10
+          },
+          "3": {
+            "ID": "IQ2",
+            "description": "Input-queue 2 for R3",
+            "capacity": 10
+          },
+          "4": {
+            "ID": "OQ3",
+            "description": "Output-queue 3 for R3",
+            "capacity": 10
+          },
+          "5": {
+            "ID": "SourceQueue",
+            "description": "Output-Queue for all sources",
+            "capacity": 0
+          },
+          "6": {
+            "ID": "SinkQueue",
+            "description": "Input-Queue for all sinks",
+            "capacity": 0
+          }
+        },
+        "materials": {
+          "0": {
+            "ID": "Material_1",
+            "description": "Material 1",
+            "material_type": "Material_1",
+            "processes": ["P1", "P2", "P3"],
+            "transport_process": "TP1"
+          },
+          "1": {
+            "ID": "Material_2",
+            "description": "Material 2",
+            "material_type": "Material_2",
+            "processes": ["P1", "P2", "P3", "P1"],
+            "transport_process": "TP1"
+          },
+          "2": {
+            "ID": "Material_3",
+            "description": "Material 3",
+            "material_type": "Material_3",
+            "processes": "data/example_material_petri_net.pnml",
+            "transport_process": "TP1"
+          }
+        }
+      },
+      "KPIEnum": {
+        "title": "KPIEnum",
+        "enum": [
+          "output",
+          "throughput",
+          "cost",
+          "WIP",
+          "throughput_time",
+          "processing_time",
+          "productive_time",
+          "standby_time",
+          "setup_time",
+          "unscheduled_downtime",
+          "dynamic_WIP",
+          "dynamic_throughput_time"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      },
+      "KPILevelEnum": {
+        "title": "KPILevelEnum",
+        "enum": [
+          "system",
+          "resource",
+          "all_materials",
+          "material_type",
+          "material",
+          "process"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      },
+      "ManhattanDistanceTimeModelData": {
+        "title": "ManhattanDistanceTimeModelData",
+        "required": ["ID", "description", "type", "speed", "reaction_time"],
+        "type": "object",
+        "properties": {
+          "ID": {
+            "title": "Id",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "type": {
+            "title": "Type",
+            "enum": ["ManhattanDistanceTimeModel"],
+            "type": "string"
+          },
+          "speed": {
+            "title": "Speed",
+            "type": "number"
+          },
+          "reaction_time": {
+            "title": "Reaction Time",
+            "type": "number"
+          }
+        },
+        "example": {
+          "ID": "manhattan_time_model_1",
+          "description": "manhattan time model with speed 180 m/min = 3 m/s",
+          "type": "ManhattanDistanceTimeModel",
+          "speed": 30,
+          "reaction_time": 0.15
+        }
+      },
+      "MaterialData": {
+        "title": "MaterialData",
+        "required": [
+          "ID",
+          "description",
+          "material_type",
+          "processes",
+          "transport_process"
+        ],
+        "type": "object",
+        "properties": {
+          "ID": {
+            "title": "Id",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "material_type": {
+            "title": "Material Type",
+            "type": "string"
+          },
+          "processes": {
+            "title": "Processes",
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "type": "string"
+              }
+            ]
+          },
+          "transport_process": {
+            "title": "Transport Process",
+            "type": "string"
+          }
+        },
+        "example": {
+          "ID": "Material_1",
+          "description": "Material 1",
+          "material_type": "Material_1",
+          "processes": ["P1", "P2", "P3"],
+          "transport_process": "TP1"
+        }
+      },
+      "MathOptHyperparameters": {
+        "title": "MathOptHyperparameters",
+        "type": "object",
+        "properties": {
+          "optimization_time_portion": {
+            "title": "Optimization Time Portion",
+            "type": "number",
+            "description": "Portion of the total time that is used for optimization.",
+            "default": 0.5
+          },
+          "number_of_solutions": {
+            "title": "Number Of Solutions",
+            "type": "integer",
+            "description": "Number of solutions that are generated.",
+            "default": 1
+          },
+          "adjusted_number_of_transport_resources": {
+            "title": "Adjusted Number Of Transport Resources",
+            "type": "integer",
+            "description": "Number of transport resources that are used for the optimization.",
+            "default": 1
+          }
+        },
+        "example": {
+          "optimization_time_portion": 0.5,
+          "number_of_solutions": 1,
+          "adjusted_number_of_transport_resources": 1
+        }
+      },
+      "Output": {
+        "title": "Output",
+        "required": ["name"],
+        "type": "object",
+        "properties": {
+          "name": {
+            "title": "Name",
+            "enum": ["output"],
+            "type": "string"
+          },
+          "target": {
+            "title": "Target",
+            "enum": ["max"],
+            "type": "string",
+            "default": "max"
+          },
+          "weight": {
+            "title": "Weight",
+            "type": "number",
+            "default": 1
+          },
+          "value": {
+            "title": "Value",
+            "type": "number"
+          },
+          "context": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/KPILevelEnum"
+            }
+          },
+          "resource": {
+            "title": "Resource",
+            "type": "string"
+          },
+          "material_type": {
+            "title": "Material Type",
+            "type": "string"
+          }
+        },
+        "example": {
+          "name": "output",
+          "target": "max",
+          "weight": 1,
+          "value": 34,
+          "context": ["system", "material_type"],
+          "material_type": "MaterialType_1"
+        }
+      },
+      "ProcessBreakDownStateData": {
+        "title": "ProcessBreakDownStateData",
+        "required": [
+          "ID",
+          "description",
+          "time_model_id",
+          "type",
+          "repair_time_model_id",
+          "process_id"
+        ],
+        "type": "object",
+        "properties": {
+          "ID": {
+            "title": "Id",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "time_model_id": {
+            "title": "Time Model Id",
+            "type": "string"
+          },
+          "type": {
+            "title": "Type",
+            "enum": ["ProcessBreakDownState"],
+            "type": "string"
+          },
+          "repair_time_model_id": {
+            "title": "Repair Time Model Id",
+            "type": "string"
+          },
+          "process_id": {
+            "title": "Process Id",
+            "type": "string"
+          }
+        },
+        "example": {
+          "ID": "ProcessBreakDownState_1",
+          "description": "Process Breakdown state machine 1",
+          "time_model_id": "function_time_model_7",
+          "type": "ProcessBreakDownState",
+          "process_id": "P1",
+          "repair_time_model_id": "function_time_model_8"
+        }
+      },
+      "ProcessData": {
+        "title": "ProcessData",
+        "required": ["ID", "description", "time_model_id"],
+        "type": "object",
+        "properties": {
+          "ID": {
+            "title": "Id",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "time_model_id": {
+            "title": "Time Model Id",
+            "type": "string"
+          }
+        },
+        "example": {
+          "ID": "P1",
+          "description": "Process 1",
+          "time_model_id": "function_time_model_1"
+        }
+      },
+      "ProcessingTime": {
+        "title": "ProcessingTime",
+        "required": ["name"],
+        "type": "object",
+        "properties": {
+          "name": {
+            "title": "Name",
+            "enum": ["processing_time"],
+            "type": "string"
+          },
+          "target": {
+            "title": "Target",
+            "enum": ["min"],
+            "type": "string",
+            "default": "min"
+          },
+          "weight": {
+            "title": "Weight",
+            "type": "number",
+            "default": 1
+          },
+          "value": {
+            "title": "Value",
+            "type": "number"
+          },
+          "context": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/KPILevelEnum"
+            }
+          },
+          "resource": {
+            "title": "Resource",
+            "type": "string"
+          },
+          "material_type": {
+            "title": "Material Type",
+            "type": "string"
+          }
+        },
+        "example": {
+          "name": "processing_time",
+          "target": "min",
+          "weight": 1,
+          "value": 1.2,
+          "context": ["resource", "process"],
+          "resource": "Resource_1",
+          "process": "P1"
+        }
+      },
+      "ProductionProcessData": {
+        "title": "ProductionProcessData",
+        "required": ["ID", "description", "time_model_id", "type"],
+        "type": "object",
+        "properties": {
+          "ID": {
+            "title": "Id",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "time_model_id": {
+            "title": "Time Model Id",
+            "type": "string"
+          },
+          "type": {
+            "title": "Type",
+            "enum": ["ProductionProcesses"],
+            "type": "string"
+          }
+        },
+        "example": {
+          "ID": "P1",
+          "description": "Process 1",
+          "time_model_id": "function_time_model_1",
+          "type": "ProductionProcesses"
+        }
+      },
+      "ProductionResourceData": {
+        "title": "ProductionResourceData",
+        "required": [
+          "ID",
+          "description",
+          "capacity",
+          "location",
+          "controller",
+          "control_policy",
+          "processes"
+        ],
+        "type": "object",
+        "properties": {
+          "ID": {
+            "title": "Id",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "capacity": {
+            "title": "Capacity",
+            "type": "integer"
+          },
+          "location": {
+            "title": "Location",
+            "maxItems": 2,
+            "minItems": 2,
+            "type": "array",
+            "items": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "controller": {
+            "title": "Controller",
+            "enum": ["SimpleController"],
+            "type": "string"
+          },
+          "control_policy": {
+            "title": "Control Policy",
+            "enum": ["FIFO", "LIFO", "SPT"],
+            "type": "string"
+          },
+          "processes": {
+            "title": "Processes",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "process_capacity": {
+            "title": "Process Capacity",
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "states": {
+            "title": "States",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "default": []
+          },
+          "input_queues": {
+            "title": "Input Queues",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "output_queues": {
+            "title": "Output Queues",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "example": {
+          "ID": "R1",
+          "description": "Resource 1",
+          "capacity": 2,
+          "location": [10, 10],
+          "controller": "SimpleController",
+          "control_policy": "FIFO",
+          "processes": ["P1", "P2"],
+          "process_capacity": [2, 1],
+          "states": [
+            "Breakdownstate_1",
+            "Setup_State_1",
+            "Setup_State_2",
+            "ProcessBreakdownState_1"
+          ],
+          "input_queues": ["IQ1"],
+          "output_queues": ["OQ1"]
+        }
+      },
+      "ProductionStateData": {
+        "title": "ProductionStateData",
+        "required": ["ID", "description", "time_model_id", "type"],
+        "type": "object",
+        "properties": {
+          "ID": {
+            "title": "Id",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "time_model_id": {
+            "title": "Time Model Id",
+            "type": "string"
+          },
+          "type": {
+            "title": "Type",
+            "enum": ["ProductionState"],
+            "type": "string"
+          }
+        },
+        "example": {
+          "ID": "ProductionState_1",
+          "description": "Production state machine 1",
+          "time_model_id": "function_time_model_1",
+          "type": "ProductionState"
+        }
+      },
+      "ProductiveTime": {
+        "title": "ProductiveTime",
+        "required": ["name"],
+        "type": "object",
+        "properties": {
+          "name": {
+            "title": "Name",
+            "enum": ["productive_time"],
+            "type": "string"
+          },
+          "target": {
+            "title": "Target",
+            "enum": ["max"],
+            "type": "string",
+            "default": "max"
+          },
+          "weight": {
+            "title": "Weight",
+            "type": "number",
+            "default": 1
+          },
+          "value": {
+            "title": "Value",
+            "type": "number"
+          },
+          "context": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/KPILevelEnum"
+            }
+          },
+          "resource": {
+            "title": "Resource",
+            "type": "string"
+          },
+          "material_type": {
+            "title": "Material Type",
+            "type": "string"
+          }
+        },
+        "example": {
+          "name": "productive_time",
+          "target": "max",
+          "weight": 1,
+          "value": 0.65,
+          "context": ["resource"],
+          "resource": "Resource_1"
+        }
+      },
+      "Project": {
+        "title": "Project",
+        "required": ["ID"],
+        "type": "object",
+        "properties": {
+          "ID": {
+            "title": "Id",
+            "type": "string"
+          },
+          "adapters": {
+            "title": "Adapters",
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/JsonAdapter"
+            },
+            "default": {}
+          }
+        },
+        "example": {
+          "ID": "Example Project",
+          "adapters": {
+            "adapter1": {
+              "seed": 24,
+              "time_models": {
+                "0": {
+                  "ID": "function_time_model_1",
+                  "description": "normal distribution time model with 20 minutes",
+                  "type": "FunctionTimeModel",
+                  "distribution_function": "normal",
+                  "parameters": [14.3, 5],
+                  "batch_size": 100
+                },
+                "1": {
+                  "ID": "function_time_model_2",
+                  "description": "constant distribution time model with 10 minutes",
+                  "type": "FunctionTimeModel",
+                  "distribution_function": "constant",
+                  "parameters": [15],
+                  "batch_size": 100
+                },
+                "2": {
+                  "ID": "function_time_model_3",
+                  "description": "normal distribution time model with 20 minutes",
+                  "type": "FunctionTimeModel",
+                  "distribution_function": "normal",
+                  "parameters": [20, 5],
+                  "batch_size": 100
+                },
+                "3": {
+                  "ID": "function_time_model_4",
+                  "description": "exponential distribution time model with 100 minutes",
+                  "type": "FunctionTimeModel",
+                  "distribution_function": "exponential",
+                  "parameters": [52],
+                  "batch_size": 100
+                },
+                "4": {
+                  "ID": "function_time_model_5",
+                  "description": "exponential distribution time model with 150 minutes",
+                  "type": "FunctionTimeModel",
+                  "distribution_function": "exponential",
+                  "parameters": [150],
+                  "batch_size": 100
+                },
+                "5": {
+                  "ID": "history_time_model_1",
+                  "description": "history time model",
+                  "type": "HistoryTimeModel",
+                  "history": [25, 13, 15, 16, 17, 20, 21]
+                },
+                "6": {
+                  "ID": "manhattan_time_model_1",
+                  "description": "manhattan time model with speed 180 m/min = 3 m/s",
+                  "type": "ManhattanDistanceTimeModel",
+                  "speed": 30,
+                  "reaction_time": 0.15
+                }
+              },
+              "states": {
+                "0": {
+                  "ID": "Breakdownstate_1",
+                  "description": "Breakdown state machine 1",
+                  "time_model_id": "function_time_model_5",
+                  "type": "BreakDownState"
+                },
+                "1": {
+                  "ID": "Breakdownstate_2",
+                  "description": "Breakdown state machine 2",
+                  "time_model_id": "function_time_model_5",
+                  "type": "BreakDownState"
+                },
+                "2": {
+                  "ID": "Setup_State_1",
+                  "description": "Setup state machine 1",
+                  "time_model_id": "function_time_model_2",
+                  "type": "SetupState",
+                  "origin_setup": "P1",
+                  "target_setup": "P2"
+                },
+                "3": {
+                  "ID": "Setup_State_2",
+                  "description": "Setup state machine 2",
+                  "time_model_id": "function_time_model_2",
+                  "type": "SetupState",
+                  "origin_setup": "P2",
+                  "target_setup": "P1"
+                },
+                "4": {
+                  "ID": "Setup_State_3",
+                  "description": "Setup state machine 3",
+                  "time_model_id": "function_time_model_2",
+                  "type": "SetupState",
+                  "origin_setup": "P1",
+                  "target_setup": "P3"
+                },
+                "5": {
+                  "ID": "Setup_State_4",
+                  "description": "Setup state machine 3",
+                  "time_model_id": "function_time_model_3",
+                  "type": "SetupState",
+                  "origin_setup": "P3",
+                  "target_setup": "P1"
+                },
+                "6": {
+                  "ID": "ProcessBreakdownState_1",
+                  "description": "Breakdown state process 1",
+                  "time_model_id": "function_time_model_5",
+                  "type": "ProcessBreakDownState",
+                  "process_id": "P1"
+                }
+              },
+              "processes": {
+                "0": {
+                  "ID": "P1",
+                  "description": "Process 1",
+                  "time_model_id": "function_time_model_1",
+                  "type": "ProductionProcesses"
+                },
+                "1": {
+                  "ID": "P2",
+                  "description": "Process 2",
+                  "time_model_id": "function_time_model_2",
+                  "type": "ProductionProcesses"
+                },
+                "2": {
+                  "ID": "P3",
+                  "description": "Process 3",
+                  "time_model_id": "function_time_model_3",
+                  "type": "ProductionProcesses"
+                },
+                "3": {
+                  "ID": "TP1",
+                  "description": "Transport Process 1",
+                  "time_model_id": "manhattan_time_model_1",
+                  "type": "TransportProcesses"
+                }
+              },
+              "queues": {
+                "0": {
+                  "ID": "IQ1",
+                  "description": "Input-queue 1 for R1 and R2",
+                  "capacity": 10
+                },
+                "1": {
+                  "ID": "OQ1",
+                  "description": "Output-queue 1 for R1",
+                  "capacity": 10
+                },
+                "2": {
+                  "ID": "OQ2",
+                  "description": "Output-queue 2 for R2",
+                  "capacity": 10
+                },
+                "3": {
+                  "ID": "IQ2",
+                  "description": "Input-queue 2 for R3",
+                  "capacity": 10
+                },
+                "4": {
+                  "ID": "OQ3",
+                  "description": "Output-queue 3 for R3",
+                  "capacity": 10
+                },
+                "5": {
+                  "ID": "SourceQueue",
+                  "description": "Output-Queue for all sources",
+                  "capacity": 0
+                },
+                "6": {
+                  "ID": "SinkQueue",
+                  "description": "Input-Queue for all sinks",
+                  "capacity": 0
+                }
+              },
+              "resources": {
+                "0": {
+                  "ID": "R1",
+                  "description": "Resource 1",
+                  "capacity": 2,
+                  "location": [10, 10],
+                  "controller": "SimpleController",
+                  "control_policy": "FIFO",
+                  "processes": ["P1", "P2"],
+                  "process_capacity": [2, 1],
+                  "states": [
+                    "Breakdownstate_1",
+                    "Setup_State_1",
+                    "Setup_State_2",
+                    "ProcessBreakdownState_1"
+                  ],
+                  "input_queues": ["IQ1"],
+                  "output_queues": ["OQ1"]
+                },
+                "1": {
+                  "ID": "R2",
+                  "description": "Resource 2",
+                  "capacity": 1,
+                  "location": [20, 10],
+                  "controller": "SimpleController",
+                  "control_policy": "FIFO",
+                  "processes": ["P2", "P3"],
+                  "states": ["Breakdownstate_2"],
+                  "input_queues": ["IQ1"],
+                  "output_queues": ["OQ2"]
+                },
+                "2": {
+                  "ID": "R3",
+                  "description": "Resource 3",
+                  "capacity": 2,
+                  "location": [20, 20],
+                  "controller": "SimpleController",
+                  "control_policy": "FIFO",
+                  "processes": ["P1", "P3"],
+                  "process_capacity": [1, 2],
+                  "states": [
+                    "Breakdownstate_1",
+                    "Breakdownstate_2",
+                    "Setup_State_3",
+                    "Setup_State_4"
+                  ],
+                  "input_queues": ["IQ2"],
+                  "output_queues": ["OQ3"]
+                },
+                "3": {
+                  "ID": "R4",
+                  "description": "Resource 3",
+                  "capacity": 2,
+                  "location": [10, 20],
+                  "controller": "SimpleController",
+                  "control_policy": "FIFO",
+                  "processes": ["P1", "P3"],
+                  "process_capacity": [2, 2],
+                  "states": [
+                    "Breakdownstate_1",
+                    "Setup_State_3",
+                    "Setup_State_4"
+                  ],
+                  "input_queues": ["IQ2"],
+                  "output_queues": ["OQ3"]
+                },
+                "4": {
+                  "ID": "TR1",
+                  "description": "Transport Resource 1",
+                  "capacity": 1,
+                  "location": [15, 15],
+                  "controller": "TransportController",
+                  "control_policy": "FIFO",
+                  "processes": ["TP1"],
+                  "states": ["Breakdownstate_1"]
+                },
+                "5": {
+                  "ID": "TR2",
+                  "description": "Transport Resource 2",
+                  "capacity": 1,
+                  "location": [15, 20],
+                  "controller": "TransportController",
+                  "control_policy": "SPT_transport",
+                  "processes": ["TP1"],
+                  "states": ["Breakdownstate_1"]
+                }
+              },
+              "materials": {
+                "0": {
+                  "ID": "Material_1",
+                  "description": "Material 1",
+                  "material_type": "Material_1",
+                  "processes": ["P1", "P2", "P3"],
+                  "transport_process": "TP1"
+                },
+                "1": {
+                  "ID": "Material_2",
+                  "description": "Material 2",
+                  "material_type": "Material_2",
+                  "processes": ["P1", "P2", "P3", "P1"],
+                  "transport_process": "TP1"
+                },
+                "2": {
+                  "ID": "Material_3",
+                  "description": "Material 3",
+                  "material_type": "Material_3",
+                  "processes": "data/example_material_petri_net.pnml",
+                  "transport_process": "TP1"
+                }
+              },
+              "sinks": {
+                "0": {
+                  "ID": "SK1",
+                  "description": "Sink 1",
+                  "location": [50, 50],
+                  "material_type": "Material_1",
+                  "input_queues": ["SinkQueue"]
+                },
+                "1": {
+                  "ID": "SK2",
+                  "description": "Sink 2",
+                  "location": [55, 50],
+                  "material_type": "Material_2",
+                  "input_queues": ["SinkQueue"]
+                },
+                "2": {
+                  "ID": "SK3",
+                  "description": "Sink 3",
+                  "location": [45, 50],
+                  "material_type": "Material_3",
+                  "input_queues": ["SinkQueue"]
+                }
+              },
+              "sources": {
+                "0": {
+                  "ID": "S1",
+                  "description": "Source 1",
+                  "location": [0, 0],
+                  "material_type": "Material_1",
+                  "time_model_id": "function_time_model_4",
+                  "router": "SimpleRouter",
+                  "routing_heuristic": "shortest_queue",
+                  "output_queues": ["SourceQueue"]
+                },
+                "1": {
+                  "ID": "S2",
+                  "description": "Source 2",
+                  "location": [30, 30],
+                  "material_type": "Material_2",
+                  "time_model_id": "function_time_model_4",
+                  "router": "SimpleRouter",
+                  "routing_heuristic": "shortest_queue",
+                  "output_queues": ["SourceQueue"]
+                },
+                "2": {
+                  "ID": "S3",
+                  "description": "Source 3",
+                  "location": [40, 30],
+                  "material_type": "Material_3",
+                  "time_model_id": "function_time_model_4",
+                  "router": "SimpleRouter",
+                  "routing_heuristic": "shortest_queue",
+                  "output_queues": ["SourceQueue"]
+                }
+              }
+            }
+          }
+        }
+      },
+      "QueueData": {
+        "title": "QueueData",
+        "required": ["ID", "description"],
+        "type": "object",
+        "properties": {
+          "ID": {
+            "title": "Id",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "capacity": {
+            "title": "Capacity",
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "default": 0
+          }
+        },
+        "example": {
+          "ID": "Q1",
+          "description": "Queue 1",
+          "capacity": 10
+        }
+      },
+      "ReconfigurationEnum": {
+        "title": "ReconfigurationEnum",
+        "enum": [
+          "production_capacity",
+          "transport_capacity",
+          "layout",
+          "sequencing_logic",
+          "routing_logic"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      },
+      "RouterType": {
+        "title": "RouterType",
+        "enum": ["SimpleRouter", "CapabilityRouter"],
+        "type": "string",
+        "description": "An enumeration."
+      },
+      "RoutingHeuristic": {
+        "title": "RoutingHeuristic",
+        "enum": ["random", "shortest_queue", "FIFO"],
+        "type": "string",
+        "description": "An enumeration."
+      },
+      "ScenarioConstrainsData": {
+        "title": "ScenarioConstrainsData",
+        "required": [
+          "max_reconfiguration_cost",
+          "max_num_machines",
+          "max_num_processes_per_machine",
+          "max_num_transport_resources"
+        ],
+        "type": "object",
+        "properties": {
+          "max_reconfiguration_cost": {
+            "title": "Max Reconfiguration Cost",
+            "type": "number"
+          },
+          "max_num_machines": {
+            "title": "Max Num Machines",
+            "type": "integer"
+          },
+          "max_num_processes_per_machine": {
+            "title": "Max Num Processes Per Machine",
+            "type": "integer"
+          },
+          "max_num_transport_resources": {
+            "title": "Max Num Transport Resources",
+            "type": "integer"
+          },
+          "target_material_count": {
+            "title": "Target Material Count",
+            "type": "object",
+            "additionalProperties": {
+              "type": "integer"
+            }
+          }
+        },
+        "example": {
+          "max_reconfiguration_cost": 120000,
+          "max_num_machines": 10,
+          "max_num_processes_per_machine": 2,
+          "max_num_transport_resources": 2,
+          "target_material_count": {
+            "Material_1": 120,
+            "Material_2": 200
+          }
+        }
+      },
+      "ScenarioData": {
+        "title": "ScenarioData",
+        "required": ["constraints", "options", "info", "optimize"],
+        "type": "object",
+        "properties": {
+          "constraints": {
+            "$ref": "#/components/schemas/ScenarioConstrainsData"
+          },
+          "options": {
+            "$ref": "#/components/schemas/ScenarioOptionsData"
+          },
+          "info": {
+            "$ref": "#/components/schemas/ScenarioInfoData"
+          },
+          "optimize": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/KPIEnum"
+            }
+          },
+          "weights": {
+            "title": "Weights",
+            "type": "object",
+            "additionalProperties": {
+              "type": "number"
+            }
+          }
+        }
+      },
+      "ScenarioInfoData": {
+        "title": "ScenarioInfoData",
+        "required": [
+          "machine_cost",
+          "transport_resource_cost",
+          "process_module_cost"
+        ],
+        "type": "object",
+        "properties": {
+          "machine_cost": {
+            "title": "Machine Cost",
+            "type": "number"
+          },
+          "transport_resource_cost": {
+            "title": "Transport Resource Cost",
+            "type": "number"
+          },
+          "process_module_cost": {
+            "title": "Process Module Cost",
+            "type": "number"
+          },
+          "breakdown_cost": {
+            "title": "Breakdown Cost",
+            "type": "number"
+          },
+          "time_range": {
+            "title": "Time Range",
+            "type": "integer"
+          },
+          "maximum_breakdown_time": {
+            "title": "Maximum Breakdown Time",
+            "type": "integer"
+          }
+        },
+        "example": {
+          "machine_cost": 30000,
+          "transport_resource_cost": 20000,
+          "process_module_cost": 2300,
+          "breakdown_cost": 1000,
+          "time_range": 2600,
+          "maximum_breakdown_time": 10
+        }
+      },
+      "ScenarioOptionsData": {
+        "title": "ScenarioOptionsData",
+        "required": [
+          "transformations",
+          "machine_controllers",
+          "transport_controllers",
+          "routing_heuristics",
+          "positions"
+        ],
+        "type": "object",
+        "properties": {
+          "transformations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReconfigurationEnum"
+            }
+          },
+          "machine_controllers": {
+            "title": "Machine Controllers",
+            "type": "array",
+            "items": {
+              "enum": ["FIFO", "LIFO", "SPT"],
+              "type": "string"
+            }
+          },
+          "transport_controllers": {
+            "title": "Transport Controllers",
+            "type": "array",
+            "items": {
+              "enum": ["FIFO", "SPT_transport"],
+              "type": "string"
+            }
+          },
+          "routing_heuristics": {
+            "title": "Routing Heuristics",
+            "type": "array",
+            "items": {
+              "enum": ["shortest_queue", "random", "FIFO"],
+              "type": "string"
+            }
+          },
+          "positions": {
+            "title": "Positions",
+            "type": "array",
+            "items": {
+              "maxItems": 2,
+              "minItems": 2,
+              "type": "array",
+              "items": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "number"
+                }
+              ]
+            }
+          }
+        },
+        "example": {
+          "machine_controllers": ["FIFO", "LIFO", "SPT"],
+          "transport_controllers": ["FIFO", "SPT_transport"],
+          "positions": [
+            [10, 10],
+            [20, 20]
+          ]
+        }
+      },
+      "SetupStateData": {
+        "title": "SetupStateData",
+        "required": [
+          "ID",
+          "description",
+          "time_model_id",
+          "type",
+          "origin_setup",
+          "target_setup"
+        ],
+        "type": "object",
+        "properties": {
+          "ID": {
+            "title": "Id",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "time_model_id": {
+            "title": "Time Model Id",
+            "type": "string"
+          },
+          "type": {
+            "title": "Type",
+            "enum": ["SetupState"],
+            "type": "string"
+          },
+          "origin_setup": {
+            "title": "Origin Setup",
+            "type": "string"
+          },
+          "target_setup": {
+            "title": "Target Setup",
+            "type": "string"
+          }
+        },
+        "example": {
+          "ID": "Setup_State_2",
+          "description": "Setup state machine 2",
+          "time_model_id": "function_time_model_2",
+          "type": "SetupState",
+          "origin_setup": "P2",
+          "target_setup": "P1"
+        }
+      },
+      "SetupTime": {
+        "title": "SetupTime",
+        "required": ["name"],
+        "type": "object",
+        "properties": {
+          "name": {
+            "title": "Name",
+            "enum": ["setup_time"],
+            "type": "string"
+          },
+          "target": {
+            "title": "Target",
+            "enum": ["min"],
+            "type": "string",
+            "default": "min"
+          },
+          "weight": {
+            "title": "Weight",
+            "type": "number",
+            "default": 1
+          },
+          "value": {
+            "title": "Value",
+            "type": "number"
+          },
+          "context": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/KPILevelEnum"
+            }
+          },
+          "resource": {
+            "title": "Resource",
+            "type": "string"
+          },
+          "material_type": {
+            "title": "Material Type",
+            "type": "string"
+          }
+        },
+        "example": {
+          "name": "setup_time",
+          "target": "min",
+          "weight": 1,
+          "value": 0.08,
+          "context": ["resource"],
+          "resource": "Resource_1"
+        }
+      },
+      "SimulatedAnnealingHyperparameters": {
+        "title": "SimulatedAnnealingHyperparameters",
+        "type": "object",
+        "properties": {
+          "seed": {
+            "title": "Seed",
+            "type": "integer",
+            "description": "Seed for random number generator",
+            "default": 0
+          },
+          "Tmax": {
+            "title": "Tmax",
+            "type": "integer",
+            "description": "Maximum temperature",
+            "default": 10000
+          },
+          "Tmin": {
+            "title": "Tmin",
+            "type": "integer",
+            "description": "Minimum temperature",
+            "default": 1
+          },
+          "steps": {
+            "title": "Steps",
+            "type": "integer",
+            "description": "Number of steps",
+            "default": 4000
+          },
+          "updates": {
+            "title": "Updates",
+            "type": "integer",
+            "description": "Number of updates",
+            "default": 300
+          }
+        },
+        "example": {
+          "seed": 0,
+          "Tmax": 10000,
+          "Tmin": 1,
+          "steps": 4000,
+          "updates": 300
+        }
+      },
+      "SinkData": {
+        "title": "SinkData",
+        "required": [
+          "ID",
+          "description",
+          "location",
+          "material_type",
+          "input_queues"
+        ],
+        "type": "object",
+        "properties": {
+          "ID": {
+            "title": "Id",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "location": {
+            "title": "Location",
+            "maxItems": 2,
+            "minItems": 2,
+            "type": "array",
+            "items": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "material_type": {
+            "title": "Material Type",
+            "type": "string"
+          },
+          "input_queues": {
+            "title": "Input Queues",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "example": {
+          "ID": "SK1",
+          "description": "Sink 1",
+          "location": [50, 50],
+          "material_type": "Material_1",
+          "input_queues": ["SinkQueue"]
+        }
+      },
+      "SourceData": {
+        "title": "SourceData",
+        "required": [
+          "ID",
+          "description",
+          "location",
+          "material_type",
+          "time_model_id",
+          "router",
+          "routing_heuristic",
+          "output_queues"
+        ],
+        "type": "object",
+        "properties": {
+          "ID": {
+            "title": "Id",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "location": {
+            "title": "Location",
+            "maxItems": 2,
+            "minItems": 2,
+            "type": "array",
+            "items": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "material_type": {
+            "title": "Material Type",
+            "type": "string"
+          },
+          "time_model_id": {
+            "title": "Time Model Id",
+            "type": "string"
+          },
+          "router": {
+            "$ref": "#/components/schemas/RouterType"
+          },
+          "routing_heuristic": {
+            "$ref": "#/components/schemas/RoutingHeuristic"
+          },
+          "output_queues": {
+            "title": "Output Queues",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "example": {
+          "ID": "S1",
+          "description": "Source 1",
+          "location": [0, 0],
+          "material_type": "Material_1",
+          "time_model_id": "function_time_model_4",
+          "router": "SimpleRouter",
+          "routing_heuristic": "shortest_queue",
+          "output_queues": ["SourceQueue"]
+        }
+      },
+      "StandbyTime": {
+        "title": "StandbyTime",
+        "required": ["name"],
+        "type": "object",
+        "properties": {
+          "name": {
+            "title": "Name",
+            "enum": ["standby_time"],
+            "type": "string"
+          },
+          "target": {
+            "title": "Target",
+            "enum": ["min"],
+            "type": "string",
+            "default": "min"
+          },
+          "weight": {
+            "title": "Weight",
+            "type": "number",
+            "default": 1
+          },
+          "value": {
+            "title": "Value",
+            "type": "number"
+          },
+          "context": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/KPILevelEnum"
+            }
+          },
+          "resource": {
+            "title": "Resource",
+            "type": "string"
+          },
+          "material_type": {
+            "title": "Material Type",
+            "type": "string"
+          }
+        },
+        "example": {
+          "name": "standby_time",
+          "target": "min",
+          "weight": 1,
+          "value": 0.12,
+          "context": ["resource"],
+          "resource": "Resource_1"
+        }
+      },
+      "StateData": {
+        "title": "StateData",
+        "required": ["ID", "description", "time_model_id", "type"],
+        "type": "object",
+        "properties": {
+          "ID": {
+            "title": "Id",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "time_model_id": {
+            "title": "Time Model Id",
+            "type": "string"
+          },
+          "type": {
+            "title": "Type",
+            "enum": [
+              "BreakDownState",
+              "ProductionState",
+              "TransportState",
+              "SetupState"
+            ],
+            "type": "string"
+          }
+        },
+        "example": {
+          "ID": "state_1",
+          "description": "State data for state_1",
+          "time_model_id": "time_model_1",
+          "type": "ProductionState"
+        }
+      },
+      "TabuSearchHyperparameters": {
+        "title": "TabuSearchHyperparameters",
+        "type": "object",
+        "properties": {
+          "seed": {
+            "title": "Seed",
+            "type": "integer",
+            "description": "Seed for random number generator",
+            "default": 0
+          },
+          "tabu_size": {
+            "title": "Tabu Size",
+            "type": "integer",
+            "description": "Size of tabu list",
+            "default": 10
+          },
+          "max_steps": {
+            "title": "Max Steps",
+            "type": "integer",
+            "description": "Maximum number of steps",
+            "default": 300
+          },
+          "max_score": {
+            "title": "Max Score",
+            "type": "number",
+            "description": "Maximum score",
+            "default": 500
+          }
+        },
+        "example": {
+          "seed": 0,
+          "tabu_size": 10,
+          "max_steps": 300,
+          "max_score": 500
+        }
+      },
+      "Throughput": {
+        "title": "Throughput",
+        "required": ["name"],
+        "type": "object",
+        "properties": {
+          "name": {
+            "title": "Name",
+            "enum": ["throughput"],
+            "type": "string"
+          },
+          "target": {
+            "title": "Target",
+            "enum": ["max"],
+            "type": "string",
+            "default": "max"
+          },
+          "weight": {
+            "title": "Weight",
+            "type": "number",
+            "default": 1
+          },
+          "value": {
+            "title": "Value",
+            "type": "number"
+          },
+          "context": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/KPILevelEnum"
+            }
+          },
+          "resource": {
+            "title": "Resource",
+            "type": "string"
+          },
+          "material_type": {
+            "title": "Material Type",
+            "type": "string"
+          }
+        },
+        "example": {
+          "name": "throughput",
+          "target": "max",
+          "weight": 1,
+          "value": 4.32,
+          "context": ["system", "material_type"],
+          "material_type": "MaterialType_1"
+        }
+      },
+      "ThroughputTime": {
+        "title": "ThroughputTime",
+        "required": ["name"],
+        "type": "object",
+        "properties": {
+          "name": {
+            "title": "Name",
+            "enum": ["throughput_time"],
+            "type": "string"
+          },
+          "target": {
+            "title": "Target",
+            "enum": ["min"],
+            "type": "string",
+            "default": "min"
+          },
+          "weight": {
+            "title": "Weight",
+            "type": "number",
+            "default": 1
+          },
+          "value": {
+            "title": "Value",
+            "type": "number"
+          },
+          "context": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/KPILevelEnum"
+            }
+          },
+          "resource": {
+            "title": "Resource",
+            "type": "string"
+          },
+          "material_type": {
+            "title": "Material Type",
+            "type": "string"
+          }
+        },
+        "example": {
+          "name": "throughput_time",
+          "target": "min",
+          "weight": 1,
+          "value": 221.1,
+          "context": ["system", "material_type"],
+          "material_type": "MaterialType_1"
+        }
+      },
+      "TransportProcessData": {
+        "title": "TransportProcessData",
+        "required": ["ID", "description", "time_model_id", "type"],
+        "type": "object",
+        "properties": {
+          "ID": {
+            "title": "Id",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "time_model_id": {
+            "title": "Time Model Id",
+            "type": "string"
+          },
+          "type": {
+            "title": "Type",
+            "enum": ["TransportProcesses"],
+            "type": "string"
+          }
+        },
+        "example": {
+          "ID": "TP1",
+          "description": "Transport Process 1",
+          "time_model_id": "manhattan_time_model_1",
+          "type": "TransportProcesses"
+        }
+      },
+      "TransportResourceData": {
+        "title": "TransportResourceData",
+        "required": [
+          "ID",
+          "description",
+          "capacity",
+          "location",
+          "controller",
+          "control_policy",
+          "processes"
+        ],
+        "type": "object",
+        "properties": {
+          "ID": {
+            "title": "Id",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "capacity": {
+            "title": "Capacity",
+            "type": "integer"
+          },
+          "location": {
+            "title": "Location",
+            "maxItems": 2,
+            "minItems": 2,
+            "type": "array",
+            "items": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "controller": {
+            "title": "Controller",
+            "enum": ["TransportController"],
+            "type": "string"
+          },
+          "control_policy": {
+            "title": "Control Policy",
+            "enum": ["FIFO", "SPT_transport"],
+            "type": "string"
+          },
+          "processes": {
+            "title": "Processes",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "process_capacity": {
+            "title": "Process Capacity",
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "states": {
+            "title": "States",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "default": []
+          }
+        },
+        "example": {
+          "ID": "TR1",
+          "description": "Transport Resource 1",
+          "capacity": 1,
+          "location": [15, 15],
+          "controller": "TransportController",
+          "control_policy": "FIFO",
+          "processes": ["TP1"],
+          "states": ["Breakdownstate_1"]
+        }
+      },
+      "TransportStateData": {
+        "title": "TransportStateData",
+        "required": ["ID", "description", "time_model_id", "type"],
+        "type": "object",
+        "properties": {
+          "ID": {
+            "title": "Id",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "time_model_id": {
+            "title": "Time Model Id",
+            "type": "string"
+          },
+          "type": {
+            "title": "Type",
+            "enum": ["TransportState"],
+            "type": "string"
+          }
+        },
+        "example": {
+          "ID": "TransportState_1",
+          "description": "Transport state machine 1",
+          "time_model_id": "function_time_model_3",
+          "type": "TransportState"
+        }
+      },
+      "UnscheduledDowntime": {
+        "title": "UnscheduledDowntime",
+        "required": ["name"],
+        "type": "object",
+        "properties": {
+          "name": {
+            "title": "Name",
+            "enum": ["unscheduled_downtime"],
+            "type": "string"
+          },
+          "target": {
+            "title": "Target",
+            "enum": ["min"],
+            "type": "string",
+            "default": "min"
+          },
+          "weight": {
+            "title": "Weight",
+            "type": "number",
+            "default": 1
+          },
+          "value": {
+            "title": "Value",
+            "type": "number"
+          },
+          "context": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/KPILevelEnum"
+            }
+          },
+          "resource": {
+            "title": "Resource",
+            "type": "string"
+          },
+          "material_type": {
+            "title": "Material Type",
+            "type": "string"
+          }
+        },
+        "example": {
+          "name": "unscheduled_downtime",
+          "target": "min",
+          "weight": 1,
+          "value": 0.1,
+          "context": ["resource"],
+          "resource": "Resource_1"
+        }
+      },
+      "ValidationError": {
+        "title": "ValidationError",
+        "required": ["loc", "msg", "type"],
+        "type": "object",
+        "properties": {
+          "loc": {
+            "title": "Location",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            }
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        }
+      },
+      "WIP": {
+        "title": "WIP",
+        "required": ["name"],
+        "type": "object",
+        "properties": {
+          "name": {
+            "title": "Name",
+            "enum": ["WIP"],
+            "type": "string"
+          },
+          "target": {
+            "title": "Target",
+            "enum": ["min"],
+            "type": "string",
+            "default": "min"
+          },
+          "weight": {
+            "title": "Weight",
+            "type": "number",
+            "default": 1
+          },
+          "value": {
+            "title": "Value",
+            "type": "number"
+          },
+          "context": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/KPILevelEnum"
+            }
+          },
+          "resource": {
+            "title": "Resource",
+            "type": "string"
+          },
+          "material_type": {
+            "title": "Material Type",
+            "type": "string"
+          }
+        },
+        "example": {
+          "name": "WIP",
+          "target": "min",
+          "weight": 1,
+          "value": 121,
+          "context": ["system", "material_type"],
+          "material_type": "MaterialType_1"
+        }
+      }
+    }
+  }
+}
