@@ -28,13 +28,6 @@ class TestAdaptersApi(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def test_create_adapter_projects_project_id_adapters_put(self):
-        """Test case for create_adapter_projects_project_id_adapters_put
-
-        Create Adapter  # noqa: E501
-        """
-        pass
-
     def test_delete_adapter_projects_project_id_adapters_adapter_id_delete(self):
         """Test case for delete_adapter_projects_project_id_adapters_adapter_id_delete
 

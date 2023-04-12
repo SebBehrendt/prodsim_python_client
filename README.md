@@ -53,18 +53,6 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = swagger_client.AdaptersApi(swagger_client.ApiClient(configuration))
-body = swagger_client.JsonAdapter() # JsonAdapter | 
-project_id = 'project_id_example' # str | 
-
-try:
-    # Create Adapter
-    api_response = api_instance.create_adapter_projects_project_id_adapters_put(body, project_id)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling AdaptersApi->create_adapter_projects_project_id_adapters_put: %s\n" % e)
-
-# create an instance of the API class
-api_instance = swagger_client.AdaptersApi(swagger_client.ApiClient(configuration))
 project_id = 'project_id_example' # str | 
 adapter_id = 'adapter_id_example' # str | 
 
@@ -118,7 +106,6 @@ All URIs are relative to */*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*AdaptersApi* | [**create_adapter_projects_project_id_adapters_put**](docs/AdaptersApi.md#create_adapter_projects_project_id_adapters_put) | **PUT** /projects/{project_id}/adapters | Create Adapter
 *AdaptersApi* | [**delete_adapter_projects_project_id_adapters_adapter_id_delete**](docs/AdaptersApi.md#delete_adapter_projects_project_id_adapters_adapter_id_delete) | **DELETE** /projects/{project_id}/adapters/{adapter_id} | Delete Adapter
 *AdaptersApi* | [**read_adapter_projects_project_id_adapters_adapter_id_get**](docs/AdaptersApi.md#read_adapter_projects_project_id_adapters_adapter_id_get) | **GET** /projects/{project_id}/adapters/{adapter_id} | Read Adapter
 *AdaptersApi* | [**read_adapters_projects_project_id_adapters_get**](docs/AdaptersApi.md#read_adapters_projects_project_id_adapters_get) | **GET** /projects/{project_id}/adapters | Read Adapters

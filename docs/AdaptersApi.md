@@ -4,59 +4,10 @@ All URIs are relative to */*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_adapter_projects_project_id_adapters_put**](AdaptersApi.md#create_adapter_projects_project_id_adapters_put) | **PUT** /projects/{project_id}/adapters | Create Adapter
 [**delete_adapter_projects_project_id_adapters_adapter_id_delete**](AdaptersApi.md#delete_adapter_projects_project_id_adapters_adapter_id_delete) | **DELETE** /projects/{project_id}/adapters/{adapter_id} | Delete Adapter
 [**read_adapter_projects_project_id_adapters_adapter_id_get**](AdaptersApi.md#read_adapter_projects_project_id_adapters_adapter_id_get) | **GET** /projects/{project_id}/adapters/{adapter_id} | Read Adapter
 [**read_adapters_projects_project_id_adapters_get**](AdaptersApi.md#read_adapters_projects_project_id_adapters_get) | **GET** /projects/{project_id}/adapters | Read Adapters
 [**update_adapter_projects_project_id_adapters_adapter_id_put**](AdaptersApi.md#update_adapter_projects_project_id_adapters_adapter_id_put) | **PUT** /projects/{project_id}/adapters/{adapter_id} | Update Adapter
-
-# **create_adapter_projects_project_id_adapters_put**
-> object create_adapter_projects_project_id_adapters_put(body, project_id)
-
-Create Adapter
-
-### Example
-```python
-from __future__ import print_function
-import time
-import swagger_client
-from swagger_client.rest import ApiException
-from pprint import pprint
-
-# create an instance of the API class
-api_instance = swagger_client.AdaptersApi()
-body = swagger_client.JsonAdapter() # JsonAdapter | 
-project_id = 'project_id_example' # str | 
-
-try:
-    # Create Adapter
-    api_response = api_instance.create_adapter_projects_project_id_adapters_put(body, project_id)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling AdaptersApi->create_adapter_projects_project_id_adapters_put: %s\n" % e)
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **body** | [**JsonAdapter**](JsonAdapter.md)|  | 
- **project_id** | **str**|  | 
-
-### Return type
-
-**object**
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_adapter_projects_project_id_adapters_adapter_id_delete**
 > object delete_adapter_projects_project_id_adapters_adapter_id_delete(project_id, adapter_id)
