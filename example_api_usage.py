@@ -184,7 +184,7 @@ try:
     )
     response = thread.get()
     print(response) # list of pareto optimal solutions, which all have been simulated and can be accessed as shown above with their id
-    pprint("Pareto Front is registered Finished _________________________________")
+    print("Pareto Front is registered Finished _________________________________")
 
 
 except ApiException as e:
